@@ -1,15 +1,31 @@
 <template>
   <div id="app">
     
+    <h1>Vue Memory Game</h1>
+
+    <button v-on:click="resetBoard">New Game</button>
+
+    <board />
+
   </div>
 </template>
 
 <script>
+import board from './components/board.vue';
+
 export default {
   name: 'app',
+  components: {
+    board
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    resetBoard: function() {
+      location.reload();
     }
   }
 }
@@ -42,4 +58,21 @@ li {
 a {
   color: #42b983;
 }
+
+button {
+  background-color: LightSeaGreen;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+}
+
+button:hover {
+  background-color: #30a39c;
+  cursor: pointer;
+}
+
 </style>
