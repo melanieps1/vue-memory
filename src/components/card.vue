@@ -1,61 +1,6 @@
-var cards = [
-	
-	{
-		name: 'circle',
-		image: '../assets/images/circle.png',
-		id: 1
-	},
-	{
-		name: 'diamond',
-		image: '../assets/images/diamond.png',
-		id: 2
-	},
-	{
-		name: 'heart',
-		image: '../assets/images/heart.png',
-		id: 3
-	},
-	{
-		name: 'oval',
-		image: '../assets/images/oval.png',
-		id: 4
-	},
-	{
-		name: 'pentagon',
-		image: '../assets/images/pentagon.png',
-		id: 5
-	},
-	{
-		name: 'rectangle',
-		image: '../assets/images/rectangle.png',
-		id: 6
-	},
-	{
-		name: 'square',
-		image: '../assets/images/square.png',
-		id: 7
-	},
-	{
-		name: 'star',
-		image: '../assets/images/star.png',
-		id: 8
-	},
-	{
-		name: 'triangle',
-		image: '../assets/images/triangle.png',
-		id: 9
-	},
-	{
-		name: 'x',
-		image: '../assets/images/x.png',
-		id: 10
-	}
-
-];
-
 <template>
 
-	<div class="card" v-bind:class="cardId" v-on:click="uidLog"></div>
+	<div class="card" v-bind:class="{ 'back': showing == 'back' }" v-on:click="flipCard"> {{ face }} </div>
 	
 </template>
 
@@ -65,18 +10,23 @@ var cards = [
 	export default {
 		name: 'card',
 
-		props: ['cards', 'image'],
+		props: ['face', 'showing'],
 
-		data() {
+		data: function() {
 			return {
-				cardId: this._uid
+				// cardId: this._uid
 			}
 		},
 
 		methods: {
 
-			uidLog() {
+			uidLog: function() {
 				console.log('Unique ID: ', this._uid);
+			},
+
+			flipCard: function() {
+				this.$emit('flipCard');
+				alert('card flipped');
 			}
 
 		}
