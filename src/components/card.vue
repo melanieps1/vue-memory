@@ -1,6 +1,10 @@
 <template>
 
-	<div class="card" v-bind:class="{ 'back': showing == 'back' }" v-on:click="flipCard"> {{ face }} </div>
+	<div class="card"
+		v-bind:class="{ 'back': !showing }"
+		v-on:click="flipCard">
+		{{ face }}
+	</div>
 	
 </template>
 
@@ -10,25 +14,24 @@
 	export default {
 		name: 'card',
 
-		props: ['face', 'showing'],
+		props: ['face', 'showing', 'index', 'flippable', 'flips'],
 
 		data: function() {
 			return {
-				// cardId: this._uid
 			}
 		},
 
 		methods: {
 
-			uidLog: function() {
-				console.log('Unique ID: ', this._uid);
-			},
+			// uidLog: function() {
+			// 	console.log('Unique ID: ', this._uid);
+			// },
 
 			flipCard: function() {
-				this.$emit('flipCard');
-				alert('card flipped');
+				if (this.flippable && this.flips < 2) {
+					this.$emit('flipCard', this.index);
+				}
 			}
-
 		}
 	}
 	
@@ -45,8 +48,6 @@
 	transition: transform 1s;
   transform-style: preserve-3d;
   width: 150px;
-/*  background-color: #ccc;
-	border: 10px solid white;*/
 }
 
 .card:hover {

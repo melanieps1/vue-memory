@@ -3,9 +3,9 @@
     
     <h1>Vue Memory Game</h1>
 
-    <button v-on:click="resetBoard">New Game</button>
+    <board></board>
 
-    <board />
+    <button v-on:click="resetBoard">New Game</button>
 
   </div>
 </template>
@@ -22,14 +22,12 @@ export default {
 
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
 
   methods: {
     resetBoard: function() {
       location.reload();
-
     }
   }
 }

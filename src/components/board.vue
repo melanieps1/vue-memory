@@ -1,42 +1,17 @@
 <template>
 	
 	<div class="board">
-		<table>
-			<tbody>
-				<tr
-					is="card"
-					v-for"card in cards"></tr>
 
-				<!-- <tr>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-				</tr>
-				<tr>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-				</tr>
-				<tr>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-				</tr>
-				<tr>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-					<td><card /></td>
-				</tr> -->
-			</tbody>
-		</table>
+		<card
+					v-for="(card, index) in deck.cards"
+					v-bind:face=card.face
+					v-bind:showing=card.showing
+					v-bind:index=index
+					v-bind:flippable=card.flippable
+					v-bind:flips="flipped.length"
+					v-on:flipCard="flipCard">
+			</card>
+
 	</div>
 
 </template>
@@ -49,71 +24,83 @@ import card from './card.vue'
 export default {
 	name: 'board',
 
-	data: 
-		deck: {
-			cards: [
-				
-				{
-					name: 'circle',
-					image: '../assets/images/circle.png',
-					id: 1
-				},
-				{
-					name: 'diamond',
-					image: '../assets/images/diamond.png',
-					id: 2
-				},
-				{
-					name: 'heart',
-					image: '../assets/images/heart.png',
-					id: 3
-				},
-				{
-					name: 'oval',
-					image: '../assets/images/oval.png',
-					id: 4
-				},
-				{
-					name: 'pentagon',
-					image: '../assets/images/pentagon.png',
-					id: 5
-				},
-				{
-					name: 'rectangle',
-					image: '../assets/images/rectangle.png',
-					id: 6
-				},
-				{
-					name: 'square',
-					image: '../assets/images/square.png',
-					id: 7
-				},
-				{
-					name: 'star',
-					image: '../assets/images/star.png',
-					id: 8
-				},
-				{
-					name: 'triangle',
-					image: '../assets/images/triangle.png',
-					id: 9
-				},
-				{
-					name: 'x',
-					image: '../assets/images/x.png',
-					id: 10
-				}
-
-			];
-		},
-
 	components: {
 		card
 	},
 
+	data:  function() {
+		return {
+			turn: 0,      // turn number
+			pairs: 0,     // number of matched made
+			flipped: [],  // number of cards that are flipped in this turn
+
+			deck: {
+				cards: [
+					{
+						face: 'A',
+						showing: false,
+						flippable: true
+					},
+					{
+						face: 'B',
+						showing: false,
+						flippable: true
+					},
+					{
+						face: 'B',
+						showing: false,
+						flippable: true
+					},
+					{
+						face: 'A',
+						showing: false,
+						flippable: true
+					}
+				]
+			}
+		}
+
+	},
+
 	methods: {
 
+		noMatchThisTurn: function() {
+			this.deck.cards[this.flipped[0]].flippable = true;
+			this.deck.cards[this.flipped[0]].showing = false;
+			this.deck.cards[this.flipped[1]].flippable = true;
+			this.deck.cards[this.flipped[1]].showing = false;
+			this.turn++;
+			this.flipped = [];
+		},
 
+		flipCard: function(index) {
+			// alert('flip card' + uid);
+			this.deck.cards[index].showing = !this.deck.cards[index].showing;
+			this.deck.cards[index].flippable = false;
+			this.flipped.push(index);
+			if (this.flipped.length == 2) {
+
+				// check to see if flipped cards match				
+				if (this.deck.cards[this.flipped[0]].face === this.deck.cards[this.flipped[1]].face) {
+
+					// we have a match!
+					this.turn++;
+					this.pairs++;
+					this.flipped = [];
+
+					// check for win
+					if (this.deck.cards.length/2 === this.pairs) {
+						// game is won!
+						alert('you won!')
+					}
+				} else {
+					console.log('not a match, resetting cards');
+
+					// not a match, wait five seconds then turn cards back over
+					setTimeout(this.noMatchThisTurn, 2000);
+				}
+			}
+		}
 
 	}
 	
@@ -123,9 +110,5 @@ export default {
 
 
 <style>
-
-	table {
-		margin: auto;
-	}
 	
 </style>
