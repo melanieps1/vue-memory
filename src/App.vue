@@ -18,7 +18,7 @@ export default {
   components: {
     board
   },
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }

@@ -1,6 +1,6 @@
 <template>
 
-	<div class="card" v-bind:class="side" v-on:click="flipCard(side)"></div>
+	<div class="card" v-bind:class="cardId" v-on:click="helpMe"></div>
 	
 </template>
 
@@ -10,17 +10,27 @@
 	export default {
 		name: 'card',
 		props: ['side'],
-		methods: {
-			flipCard: function(side) {
-				// console.log(side);
-				if (side === "back") {
-					this.side = "front";
-					// this.$emit('cardflipped', 'front');
-				} else {
-					this.side = "back";
-				}
-				// console.log(side);
+		data() {
+			return {
+				cardId: this._uid
 			}
+		},
+		methods: {
+
+			helpMe() {
+				console.log(this._uid);
+			}
+
+			// flipCard: function(side) {
+			// 	// console.log(side);
+			// 	if (side === "back") {
+			// 		this.side = "front";
+			// 		// this.$emit('cardflipped', 'front');
+			// 	} else {
+			// 		this.side = "back";
+			// 	}
+			// 	// console.log(side);
+			// }
 		}
 	}
 	
@@ -32,11 +42,11 @@
 .card {
 	border-radius: 10px;
 	box-shadow: 2px 2px 8px #888;
-	height: 200px;
-	margin: 12px;
+	height: 125px;
+	margin: 8px;
 	transition: transform 1s;
   transform-style: preserve-3d;
-  width: 200px;
+  width: 125px;
 }
 
 .card:hover {
