@@ -4,32 +4,32 @@
 		<table>
 			<tbody>
 				<tr>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
 				</tr>
 				<tr>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
 				</tr>
 				<tr>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
 				</tr>
 				<tr>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
-					<td><card side="back" /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
+					<td><card /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -44,11 +44,14 @@ import card from './card.vue'
 
 export default {
 	name: 'board',
+
 	components: {
 		card
 	},
+
 	methods: {
 	}
+	
 }
 	
 </script>
